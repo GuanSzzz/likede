@@ -42,6 +42,7 @@
           type="primary"
           style="width: 100%; margin-bottom: 30px"
           @click="login"
+          :loading="isload"
           >登录</el-button
         >
       </el-form>
@@ -66,7 +67,8 @@ export default {
         loginName: [{ required: true, message: '请输入账号', trigger: 'blur' }],
         password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
         code: [{ required: true, message: '请输入验证码', trigger: 'blur' }]
-      }
+      },
+      isload: false
     }
   },
 
@@ -82,6 +84,7 @@ export default {
     },
     // 点击登录
     async login() {
+      this.isload = true
       try {
         // 表单提交前验证
         await this.$refs.loginForm.validate()
@@ -93,9 +96,10 @@ export default {
             type: 'warning'
           })
         }
-       
       } catch (error) {
         console.log(error)
+      } finally {
+        this.isload = false
       }
     }
   }

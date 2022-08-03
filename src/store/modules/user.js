@@ -1,12 +1,13 @@
 // 引入Api
-import { getImgCode, login } from '@/api/user'
+import { getImgCode, login, getUserInfo } from '@/api/user'
 import router from '@/router'
 export default {
   namespaced: true,
   state: {
     imgCode: '',
-    token: JSON.parse(localStorage.getItem('LKDtoken')) || '',
-    data: {}
+    token: '',
+    data: {},
+    userInfo: {}
   },
   mutations: {
     setImgCode(state, payload) {
@@ -15,6 +16,9 @@ export default {
     setToken(state, payload) {
       state.token = payload.token
       state.data = payload
+    },
+    setUserInfo(state, payload) {
+      state.userInfo = payload
     }
   },
   actions: {
@@ -31,14 +35,20 @@ export default {
     async getToken(context, payload) {
       try {
         const res = await login(payload)
-        console.log(res)
+        // console.log(res)
         context.commit('setToken', res.data)
         if (res.data.success) {
           // 路由跳转
-          localStorage.setItem('LKDtoken', JSON.stringify(res.data.token))
           router.push('/')
         }
-        // token存本地
+      } catch (error) {}
+    },
+    // 获取用户信息
+    async getUserInfo(context) {
+      try {
+        const res = await getUserInfo()
+        console.log(res)
+        context.commit('setUserInfo', res.data)
       } catch (error) {}
     }
   },

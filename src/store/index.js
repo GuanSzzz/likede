@@ -5,7 +5,7 @@ import app from './modules/app'
 import settings from './modules/settings'
 import user from './modules/user'
 // 引入自动保存的包
-// import createVuexPersisted from 'vuex-persistedstate'
+import createVuexPersisted from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
@@ -16,15 +16,18 @@ const store = new Vuex.Store({
     user
   },
   getters,
-  // plugins: [
-  //   createVuexPersisted({
-  //     reducer(state) {
-  //       return {
-  //         token: state.user.token
-  //       }
-  //     }
-  //   })
-  // ]
+  plugins: [
+    createVuexPersisted({
+      reducer(state) {
+        return {
+          user: {
+            token: state.user.token,
+            data: state.user.data
+          }
+        }
+      }
+    })
+  ]
 })
 
 export default store

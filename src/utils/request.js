@@ -17,5 +17,9 @@ request.interceptors.request.use(
     return Promise.reject(error)
   }
 )
-// request.interceptors.response.use() // 响应拦截器
+// 响应拦截器
+// request.interceptors.response.use((res) => {
+//   const { data } = res
+//   return res
+// })
 export default request // 导出axios实例

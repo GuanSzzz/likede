@@ -1,3 +1,4 @@
+import store from '@/store'
 import request from '@/utils/request'
 
 /**
@@ -27,5 +28,14 @@ export const login = (data) => {
       'Content-Type': 'application/json'
     },
     data
+  })
+}
+/**
+ * 获取用户基本信息
+ * @returns Promise
+ */
+export const getUserInfo = () => {
+  return request({
+    url: `/api/user-service/user/${store.state.user.data.userId}`
   })
 }
