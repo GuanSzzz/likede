@@ -66,6 +66,7 @@ export default {
 @import '~@/styles/variables.scss';
 
 .app-wrapper {
+  padding-top: 60px;
   @include clearfix;
   position: relative;
   height: 100%;

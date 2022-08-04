@@ -1,5 +1,5 @@
 <template>
-  <div>策略管理</div>
+  <div>工作量列表</div>
 </template>
 
 <script>

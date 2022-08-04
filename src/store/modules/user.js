@@ -1,6 +1,7 @@
 // 引入Api
 import { getImgCode, login, getUserInfo } from '@/api/user'
 import router from '@/router'
+import { setTokentime } from '@/utils/auth'
 export default {
   namespaced: true,
   state: {
@@ -14,7 +15,7 @@ export default {
       state.imgCode = payload
     },
     setToken(state, payload) {
-      state.token = payload.token
+      state.token = payload?.token
       state.data = payload
     },
     setUserInfo(state, payload) {
@@ -37,6 +38,7 @@ export default {
         const res = await login(payload)
         // console.log(res)
         context.commit('setToken', res.data)
+        setTokentime()
         if (res.data.success) {
           // 路由跳转
           router.push('/')
@@ -47,9 +49,14 @@ export default {
     async getUserInfo(context) {
       try {
         const res = await getUserInfo()
-        console.log(res)
+        // console.log(res)
         context.commit('setUserInfo', res.data)
       } catch (error) {}
+    },
+    // 退出登录
+    logout: function (context) {
+      context.commit('setToken', {})
+      context.commit('setUserInfo', {})
     }
   },
   getters: {}

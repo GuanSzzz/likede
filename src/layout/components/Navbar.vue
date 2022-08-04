@@ -5,10 +5,12 @@
     </div>
     <div class="right-menu">
       <div class="block">
-        <el-avatar
-          :size="35"
-          :src="$store.state.user.userInfo.image"
-        ></el-avatar>
+        <el-avatar :size="35">
+          <img
+            :src="$store.state.user.userInfo.image + '2345'"
+            v-isImgError="defaultImg"
+          />
+        </el-avatar>
       </div>
       <div class="welcome">
         欢迎您，<span>{{ $store.state.user.userInfo.userName }}</span>
@@ -22,9 +24,15 @@
 
 <script>
 export default {
+  data() {
+    return {
+      defaultImg:
+        'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'
+    }
+  },
   methods: {
     loginout() {
-      this.$store.state.user.token = ''
+      this.$store.dispatch('user/logout')
       this.$router.push('/login')
     }
   }
@@ -36,7 +44,8 @@ export default {
   width: 100%;
   height: 60px;
   overflow: hidden;
-  position: relative;
+  position: fixed;
+  top: 0;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   background-image: url('~@/assets/images/navbar.png');

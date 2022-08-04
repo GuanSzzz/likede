@@ -5,7 +5,15 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
-
+// 引入路由
+import workorder from './modules/workorder'
+import point from './modules/point'
+import device from './modules/device'
+import goods from './modules/goods'
+import orders from './modules/order'
+import people from './modules/people'
+import tactics from './modules/tactics'
+import checking from './modules/checking'
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -31,18 +39,19 @@ import Layout from '@/layout'
  * all roles can be accessed
  */
 export const constantRoutes = [
+  // 登录
   {
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true
   },
-
+  // 404
   {
     path: '/404',
     component: () => import('@/views/404'),
     hidden: true
   },
-
+  // 首页
   {
     path: '/',
     component: Layout,
@@ -52,160 +61,19 @@ export const constantRoutes = [
         path: 'home',
         name: 'Home',
         component: () => import('@/views/Home/index'),
-        meta: { title: '帝可得', icon: 'dashboard' }
+        meta: { title: '帝可得' }
       }
     ]
   },
-  // 工单管理
-  {
-    path: '/tickets',
-    component: Layout,
-    redirect: '/tickets/table',
-    name: 'Tickets',
-    meta: { title: '工单管理', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
-  },
-  // 点位管理
-  {
-    path: '/point',
-    component: Layout,
-    redirect: '/point/table',
-    name: 'Point',
-    meta: { title: '点位管理', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
-  },
-  // 设备管理
-  {
-    path: '/device',
-    component: Layout,
-    redirect: '/device/table',
-    name: 'Device',
-    meta: { title: '设备管理', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
-  },
-  // 人员管理
-  {
-    path: '/personnel',
-    component: Layout,
-    redirect: '/personnel/table',
-    name: 'Personnel',
-    meta: { title: '人员管理', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
-  },
-  // 商品管理
-  {
-    path: '/goods',
-    component: Layout,
-    redirect: '/goods/table',
-    name: 'Goods',
-    meta: { title: '商品管理', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
-  },
-  // 策略管理
-  {
-    path: '/tactics',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Tactics',
-        component: () => import('@/views/Tactics/index'),
-        meta: { title: '策略管理', icon: 'form' }
-      }
-    ]
-  },
-  // 订单管理
-  {
-    path: '/order',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Order',
-        component: () => import('@/views/Order/index'),
-        meta: { title: '订单管理', icon: 'form' }
-      }
-    ]
-  },
-// 对账统计
-  {
-    path: '/bill',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Bill',
-        component: () => import('@/views/Bill/index'),
-        meta: { title: '对账统计', icon: 'form' }
-      }
-    ]
-  },
-
+  workorder,
+  point,
+  device,
+  people,
+  goods,
+  tactics,
+  orders,
+  checking,
+  // 兜底
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
