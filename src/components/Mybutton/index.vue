@@ -9,14 +9,14 @@ export default {
   data() {
     return {
       style: {
-        backgroundColor: this.bgcorlor,
+        backgroundColor: this.bgcolor,
         color: this.fscolor,
         fontSize: this.fontsize
       }
     }
   },
   props: {
-    bgcorlor: {
+    bgcolor: {
       type: String,
       default: '#5f84ff'
     },

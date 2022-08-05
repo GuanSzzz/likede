@@ -29,7 +29,8 @@ export default {
 
   methods: {
     enterFn() {
-      this.$emit('enter', this.input)
+      // 将输入内容传给父组件
+      this.$emit('enter', this.input.trim())
     }
   }
 }
